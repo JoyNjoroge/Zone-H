@@ -36,16 +36,10 @@ def crop():
     im1.save(fp="file.png")
 
 def captcha():
-    try:
-        solver = TwoCaptcha('REPLACE YOUR 2CAPTCHA TOKEN')
-        currentDi = os.getcwd()
-        path = os.path.join(currentDi, 'file.png')
-        result = solver.normal(path)
-        print(result['code'])
-        driver.find_element(By.XPATH, '//*[@id="propdeface"]/form/input[1]').send_keys(str(result['code']))
-        driver.find_element(By.XPATH, '//*[@id="propdeface"]/form/input[2]').click()
-    except:
-        driver.find_element(By.XPATH, '//*[@id="propdeface"]/table/tbody/tr/td[2]/a/img').click()
+    # Putting the captch myself
+    code = input("Please enter the captcha you see in the browser: ")
+    driver.find_element(By.XPATH, '//*[@id="propdeface"]/form/input[1]').send_keys(code)
+    driver.find_element(By.XPATH, '//*[@id="propdeface"]/form/input[2]').click()
 
 
 def notiferFunction():
@@ -245,4 +239,5 @@ if __name__ == "__main__":
 
     notiferFunction()
     RemoveDuplicate()
+
     BulkChecker()
